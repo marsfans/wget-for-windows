@@ -125,7 +125,7 @@ void * hash_final(CRYPT_CTX *ctx, unsigned char *digest) {
 }
 
 
-void * hash_buffer(ALG_ID id, const char *buffer, size_t len, unsigned char *digest) {
+void * hash_buffer(ALG_ID id, const unsigned char *buffer, size_t len, unsigned char *digest) {
     CRYPT_CTX ctx;
 
     hash_init(id, &ctx);
@@ -167,11 +167,11 @@ int hash_stream(ALG_ID id, char *alg, FILE *stream, unsigned char *digest, size_
                 goto process_partial_block;
             }
         }
-        hash_update(&ctx, buffer, BLOCKSIZE);
+        hash_update(&ctx, (const unsigned char *)buffer, BLOCKSIZE);
     }
 
 process_partial_block:
-    if (sum > 0) hash_update(&ctx, buffer, sum);
+    if (sum > 0) hash_update(&ctx, (const unsigned char *)buffer, sum);
 
     hash_final(&ctx, digest);
     free(buffer);
