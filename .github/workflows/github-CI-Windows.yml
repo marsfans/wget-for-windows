@@ -194,8 +194,8 @@ jobs:
       with:
         name: wget-${{env.mingw}}-${{env.build_type}}
         path: |
-          build/${{env.build_type}}/${{env.mingw}}-config/src/wget.exe
-          build/${{env.build_type}}/${{env.mingw}}-config/src/*.dll
+          # build/${{env.build_type}}/${{env.mingw}}-config/src/wget.exe
+          build/${{env.build_type}}/${{env.mingw}}-config/src/
 
     - name: Upload logs
       uses: actions/upload-artifact@v3
